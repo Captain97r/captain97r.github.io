@@ -1,4 +1,4 @@
-import { GameObject } from 'GameObject.js'
+import { Player } from '/Player.js'
 
 var spriteSheet = new Image();
 spriteSheet.src = "img/sprite.bmp";
