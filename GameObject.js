@@ -11,8 +11,13 @@ export class GameObject {
         this.y = y;
         this.width = width;
         this.height = height;
-        posX = 0;
-        posY = 0;
+        this.posX = 0;
+        this.posY = 0;
+    }
+
+    setPosition(x, y) {
+        this.posX = x;
+        this.posY = y;
     }
 
     draw(context) {
