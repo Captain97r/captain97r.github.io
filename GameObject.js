@@ -16,8 +16,8 @@ export class GameObject {
     }
 
     setPosition(x, y) {
-        this.posX = x;
-        this.posY = y;
+        this.posX = x * 16;
+        this.posY = y * 16;
     }
 
     draw(context) {
