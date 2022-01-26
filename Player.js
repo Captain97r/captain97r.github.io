@@ -7,15 +7,18 @@ export class Player extends GameObject {
     direction;
     pressedKeys;
 
+    spriteOrientationPixelShift = {
+        up:     {x: 0, y: 0},
+        right:  {x: 0, y: 32},
+        down:   {x: 0, y: 64},
+        left:   {x: 0, y: 96}
+    }
+
     constructor(spriteSheet, speed = 3) {
         super(spriteSheet, 0, 0, 32, 32);
         this.speed = speed;
         this.direction = 0;
         this.pressedKeys = new Array();
-    }
-
-    setDirection(direction) {
-        this.direction = direction;
     }
 
     pushKey(direction) {
@@ -35,16 +38,16 @@ export class Player extends GameObject {
     changeOrientation(direction) {
         switch(direction) {
             case Direction.DOWN:
-                this.y = 64;
+                this.setSpriteShift(this.spriteOrientationPixelShift.down.x, this.spriteOrientationPixelShift.down.y);
                 break;
             case Direction.UP:
-                this.y = 0;
+                this.setSpriteShift(this.spriteOrientationPixelShift.up.x, this.spriteOrientationPixelShift.up.y);
                 break;
             case Direction.LEFT:
-                this.y = 96;
+                this.setSpriteShift(this.spriteOrientationPixelShift.left.x, this.spriteOrientationPixelShift.left.y);
                 break;
             case Direction.RIGHT:
-                this.y = 32;
+                this.setSpriteShift(this.spriteOrientationPixelShift.right.x, this.spriteOrientationPixelShift.right.y);
                 break;
         }
     }
