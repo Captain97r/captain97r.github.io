@@ -16,16 +16,16 @@ brickWall.push(new BrickWall(spriteSheet));
 function handleKeyPress(evt) {
     switch(evt.code) {
         case "KeyW":
-            player.setDirection(Direction.UP);
+            player.pushKey(Direction.UP);
             break;
         case "KeyS":
-            player.setDirection(Direction.DOWN);
+            player.pushKey(Direction.DOWN);
             break;
         case "KeyA":
-            player.setDirection(Direction.LEFT);
+            player.pushKey(Direction.LEFT);
             break;
         case "KeyD":
-            player.setDirection(Direction.RIGHT);
+            player.pushKey(Direction.RIGHT);
             break;
     }
 }
@@ -33,19 +33,25 @@ function handleKeyPress(evt) {
 function handleKeyRelease(evt) {
     switch(evt.code) {
         case "KeyW":
+            player.popKey(Direction.UP);
+            break;
         case "KeyS":
+            player.popKey(Direction.DOWN);
+            break;
         case "KeyA":
+            player.popKey(Direction.LEFT);
+            break;
         case "KeyD":
-            player.setDirection(Direction.NONE);
+            player.popKey(Direction.RIGHT);
             break;
     }
 }
 
 function init() {
-    brickWall[0].setPosition(100, 100);
-    brickWall[1].setPosition(116, 100);
-    brickWall[2].setPosition(100, 116);
-    brickWall[3].setPosition(116, 116);
+    brickWall[0].setPosition(10, 10);
+    brickWall[1].setPosition(11, 10);
+    brickWall[2].setPosition(10, 11);
+    brickWall[3].setPosition(11, 11);
 }
 
 function go() {
