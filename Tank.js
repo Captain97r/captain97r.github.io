@@ -8,12 +8,17 @@ export class Tank extends GameObject {
     speed;
     direction;
     dt;
+    frameTimeLimit = 2;
+    frameTime;
+    currentFrame;
     isMoving;
 
     constructor(spriteSheet, speed = 3) {
         super(spriteSheet, 0, 0, 32, 32);
         this.speed = speed;
         this.dt = 0;
+        this.frameTime = this.frameTimeLimit;
+        this.currentFrame = 0;
     }
 
     stopMotion() {
@@ -56,7 +61,13 @@ export class Tank extends GameObject {
                 this.posX+=this.speed * this.dt * this.isMoving;
                 break;
         }
-
-        this.selectSprite(this.direction, 0);
+        if (this.isMoving) {
+            this.frameTime -= this.dt;
+            if (this.frameTime < 0) {
+                this.currentFrame++;
+                this.frameTime = this.frameTimeLimit;
+            }
+        }
+        this.selectSprite(this.direction, this.currentFrame % 2);
     }
 }
