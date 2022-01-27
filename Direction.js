@@ -1,1 +1,1 @@
-export const Direction = { NONE: 0, LEFT: 1, RIGHT: 2, UP: 3, DOWN: 4 };
+export const Direction = { NONE: -1, UP: 0, RIGHT: 1, DOWN: 2, LEFT: 3 };

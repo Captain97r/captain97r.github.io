@@ -3,7 +3,7 @@ import { Direction } from '/Direction.js'
 import { BrickWall } from '/BrickWall.js'
 
 var spriteSheet = new Image();
-spriteSheet.src = "img/sprite.bmp";
+spriteSheet.src = "img/sprite.png";
 
 var ctx = document.getElementById('drawingCanvas').getContext('2d');
 var player = new Player(spriteSheet);
@@ -75,7 +75,7 @@ window.onload = function () {
         go();
         var currentTime = (new Date()).getTime();
         var timeDifference = currentTime - lastUpdateTime;
-        player.setSpeed(timeDifference / 5);
+        player.setTimeDelta(timeDifference / 20);
         lastUpdateTime = currentTime;
       }, 1000 / 240);
 }

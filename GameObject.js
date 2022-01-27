@@ -13,8 +13,8 @@ export class GameObject {
         this.height = height;
         this.posX = 0;
         this.posY = 0;
-        this.spriteShiftX = 0;
-        this.spriteShiftY = 0;
+        this.spriteBiasX = 0;
+        this.spriteBiasY = 0;
     }
 
     setPosition(x, y) {
@@ -22,14 +22,14 @@ export class GameObject {
         this.posY = y * 16;
     }
 
-    setSpriteShift(x, y) {
-        this.spriteShiftX = x;
-        this.spriteShiftY = y;
+    setSpriteBias(x, y) {
+        this.spriteBiasX = x;
+        this.spriteBiasY = y;
     }
 
     draw(context) {
         context.drawImage(  this.spriteSheet, 
-                            this.spritePosX + this.spriteShiftX,    this.spritePosY + this.spriteShiftY, 
+                            this.spritePosX + this.spriteBiasX,     this.spritePosY + this.spriteBiasY, 
                             this.width,                             this.height, 
                             this.posX,                              this.posY, 
                             this.width,                             this.height);
