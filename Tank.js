@@ -5,24 +5,24 @@ export class Tank extends GameObject {
 
     constructor(spriteSheet, speed = 3) {
         super(spriteSheet, 0, 0, 32, 32);
-        
+
         this.spriteSize = 32;
         this.frameTimeLimit = 2;
 
-        this.speed = speed;
+        this.defaultSpeed = speed;
+        this.speed = 0;
         this.direction = Direction.UP;
         this.dt = 0;
         this.frameTime = this.frameTimeLimit;
         this.currentFrame = 0;
-        this.isMoving = false;
     }
 
     stopMotion() {
-        this.isMoving = false;
+        this.speed = 0;
     }
 
     startMotion() {
-        this.isMoving = true;
+        this.speed = this.defaultSpeed;
     }
 
     setSpeed(speed) {
@@ -45,16 +45,16 @@ export class Tank extends GameObject {
     update() {
         switch(this.direction) {
             case Direction.DOWN:
-                this.posY+=this.speed * this.dt * this.isMoving;
+                this.posY+=this.speed * this.dt;
                 break;
             case Direction.UP:
-                this.posY-=this.speed * this.dt * this.isMoving;
+                this.posY-=this.speed * this.dt;
                 break;
             case Direction.LEFT:
-                this.posX-=this.speed * this.dt * this.isMoving;
+                this.posX-=this.speed * this.dt;
                 break;
             case Direction.RIGHT:
-                this.posX+=this.speed * this.dt * this.isMoving;
+                this.posX+=this.speed * this.dt;
                 break;
         }
         if (this.isMoving) {
