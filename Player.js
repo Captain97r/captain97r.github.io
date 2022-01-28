@@ -4,12 +4,9 @@ import { Direction } from '/Direction.js'
 
 export class Player extends Tank {
 
-    pressedKeys;
-
     constructor(spriteSheet) {
         super(spriteSheet);
         this.pressedKeys = new Array();
-        super.setDirection(Direction.UP);
         this.isMoving = false;
     }
     

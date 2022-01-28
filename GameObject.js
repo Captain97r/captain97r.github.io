@@ -1,10 +1,5 @@
 export class GameObject {
 
-    spriteSheet;
-    x; y;
-    width; height;
-    posX; posY;
-
     constructor(spriteSheet, x, y, width, height) {
         this.spriteSheet = spriteSheet;
         this.spritePosX = x;

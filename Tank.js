@@ -3,22 +3,18 @@ import { Direction } from '/Direction.js'
 
 export class Tank extends GameObject {
 
-    spriteSize = 32;
-
-    speed;
-    direction;
-    dt;
-    frameTimeLimit = 2;
-    frameTime;
-    currentFrame;
-    isMoving;
-
     constructor(spriteSheet, speed = 3) {
         super(spriteSheet, 0, 0, 32, 32);
+        
+        this.spriteSize = 32;
+        this.frameTimeLimit = 2;
+
         this.speed = speed;
+        this.direction = Direction.UP;
         this.dt = 0;
         this.frameTime = this.frameTimeLimit;
         this.currentFrame = 0;
+        this.isMoving = false;
     }
 
     stopMotion() {
