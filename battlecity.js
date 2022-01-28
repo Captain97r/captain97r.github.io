@@ -3,7 +3,7 @@ import { Direction } from '/Direction.js'
 import { BrickWall } from '/BrickWall.js'
 
 var spriteSheet = new Image();
-spriteSheet.src = "img/sprite.png";
+spriteSheet.src = "img/sprites_tp.png";
 
 var ctx = document.getElementById('drawingCanvas').getContext('2d');
 var player = new Player(spriteSheet);
@@ -55,6 +55,7 @@ function init() {
 }
 
 function go() {
+    ctx.clearRect(0, 0, 1000, 1000);
     player.update();
     player.draw(ctx);
     brickWall[0].draw(ctx);
