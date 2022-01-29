@@ -57,7 +57,7 @@ export class Tank extends GameObject {
                 this.posX+=this.speed * this.dt;
                 break;
         }
-        if (this.isMoving) {
+        if (this.speed != 0) {
             this.frameTime -= this.dt;
             if (this.frameTime < 0) {
                 this.currentFrame++;
