@@ -3,6 +3,8 @@ import { GameObject } from '/GameObject.js'
 import { Tank } from '/Tank.js'
 import { Player } from '/Player.js'
 import { BrickWall } from '/BrickWall.js'
+import { LevelBuilder } from '/LevelBuilder.js'
+import { testField } from '/TestField.js'
 
 export class Game {
 
@@ -13,16 +15,10 @@ export class Game {
         this.spriteSheet.src = "img/sprites_tp.png";
 
         this.player = new Player(this.spriteSheet);
+        this.player.setPosition(7, 7);
         this.brickWall = new Array();
-        this.brickWall.push(new BrickWall(this.spriteSheet));
-        this.brickWall.push(new BrickWall(this.spriteSheet));
-        this.brickWall.push(new BrickWall(this.spriteSheet));
-        this.brickWall.push(new BrickWall(this.spriteSheet));
-
-        this.brickWall[0].setPosition(10, 10);
-        this.brickWall[1].setPosition(11, 10);
-        this.brickWall[2].setPosition(10, 11);
-        this.brickWall[3].setPosition(11, 11);
+        let levelBuilder = new LevelBuilder(ctx, this.spriteSheet);
+        levelBuilder.build(testField, this.brickWall);
     }
 
     update() {
