@@ -12,9 +12,19 @@ export class GameObject {
         this.spriteBiasY = 0;
     }
 
-    setPosition(x, y) {
+    setXYPosition(x, y) {
+        this.posX = x;
+        this.posY = y;
+    }
+
+    setHalfCellPosition(x, y) {
         this.posX = x * 16;
         this.posY = y * 16;
+    }
+
+    setCellPosition(x, y) {
+        this.posX = x * 32;
+        this.posY = y * 32;
     }
 
     setSpriteBias(x, y) {

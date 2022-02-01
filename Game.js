@@ -15,7 +15,7 @@ export class Game {
         this.spriteSheet.src = "img/sprites_tp.png";
 
         this.player = new Player(this.spriteSheet);
-        this.player.setPosition(7, 7);
+        this.player.setCellPosition(4, 4);
         this.brickWall = new Array();
         let levelBuilder = new LevelBuilder(ctx, this.spriteSheet);
         levelBuilder.build(testField, this.brickWall);

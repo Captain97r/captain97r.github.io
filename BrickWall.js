@@ -1,13 +1,16 @@
-import { GameObject } from '/GameObject.js'
+import { BrickWallTail } from '/BrickWallTail.js'
 
-export class BrickWall extends GameObject {
+export class BrickWall {
+    constructor(spriteSheet, x, y)    {
+        this.brickWallArray = new Array();
 
-    constructor(spriteSheet) {
-        super(spriteSheet, 0, 256, 16, 16);
+        this.brickWallArray.push(new BrickWallTail(spriteSheet, x,      y));
+        this.brickWallArray.push(new BrickWallTail(spriteSheet, x + 1,  y));
+        this.brickWallArray.push(new BrickWallTail(spriteSheet, x,      y + 1));
+        this.brickWallArray.push(new BrickWallTail(spriteSheet, x + 1,  y + 1));
     }
 
-    destroy() {
-
+    draw(context) {
+        this.brickWallArray.forEach(element => element.draw(context));
     }
-
 }
