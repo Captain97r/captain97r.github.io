@@ -1,15 +1,27 @@
 export class GameObject {
 
-    constructor(spriteSheet, x, y, width, height) {
-        this.spriteSheet = spriteSheet;
-        this.spritePosX = x;
-        this.spritePosY = y;
-        this.width = width;
-        this.height = height;
+    constructor() {
+        this.spriteSheet = new Image();
+        this.spriteSheet.src = "img/sprites_tp.png";
+        
         this.posX = 0;
         this.posY = 0;
         this.spriteBiasX = 0;
         this.spriteBiasY = 0;
+    }
+
+    setSprite(x, y) {
+        this.spritePosX = x;
+        this.spritePosY = y;
+        this.width = 32;
+        this.height = 32;
+    }
+
+    setTile(x, y) {
+        this.spritePosX = x;
+        this.spritePosY = y;
+        this.width = 16;
+        this.height = 16;
     }
 
     setXYPosition(x, y) {
