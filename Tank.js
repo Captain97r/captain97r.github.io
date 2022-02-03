@@ -4,7 +4,7 @@ import { Direction } from '/Direction.js'
 export class Tank extends GameObject {
 
     constructor(spriteSheet, speed = 3) {
-        super(spriteSheet, 0, 0, 32, 32);
+        super();
 
         this.spriteSize = 32;
         this.frameTimeLimit = 2;

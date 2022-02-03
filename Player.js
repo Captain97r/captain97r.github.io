@@ -6,6 +6,7 @@ export class Player extends Tank {
 
     constructor(spriteSheet) {
         super(spriteSheet);
+        this.setSprite(0, 0);
         this.pressedKeys = new Array();
         this.isMoving = false;
     }
