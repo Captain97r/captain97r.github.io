@@ -1,11 +1,17 @@
+import { ObjectEnum } from '/ObjectEnum.js'
+
 export const testField = [
-    [ 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
-    [ 1, 0, 0, 0, 0, 0, 0, 0, 1 ],
-    [ 1, 0, 0, 0, 0, 0, 0, 0, 1 ],
-    [ 1, 0, 0, 0, 0, 0, 0, 0, 1 ],
-    [ 1, 0, 0, 0, 0, 0, 0, 0, 1 ],
-    [ 1, 0, 0, 0, 0, 0, 0, 0, 1 ],
-    [ 1, 0, 0, 0, 0, 0, 0, 0, 1 ],
-    [ 1, 0, 0, 0, 0, 0, 0, 0, 1 ],
-    [ 1, 1, 1, 1, 1, 1, 1, 1, 1 ]
+    [   ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY ],
+    [   ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY ],
+    [   ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY ],
+    [   ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY ],
+    [   ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY,      ObjectEnum.BW_TOP,     ObjectEnum.EMPTY,      ObjectEnum.BW_TOP,     ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY ],
+    [   ObjectEnum.EMPTY,      ObjectEnum.BW_TOP,     ObjectEnum.EMPTY,      ObjectEnum.BW_TOP,     ObjectEnum.EMPTY,      ObjectEnum.BW_BOT,     ObjectEnum.EMPTY,      ObjectEnum.BW_BOT,     ObjectEnum.EMPTY,      ObjectEnum.BW_TOP,     ObjectEnum.EMPTY,      ObjectEnum.BW_TOP,     ObjectEnum.EMPTY ],
+    [   ObjectEnum.BW_BOT,     ObjectEnum.EMPTY,      ObjectEnum.BW_BOT,     ObjectEnum.BW_BOT,     ObjectEnum.EMPTY,      ObjectEnum.BW_TOP,     ObjectEnum.EMPTY,      ObjectEnum.BW_TOP,     ObjectEnum.EMPTY,      ObjectEnum.BW_BOT,     ObjectEnum.BW_BOT,     ObjectEnum.EMPTY,      ObjectEnum.BW_BOT ],
+    [   ObjectEnum.BW_TOP,     ObjectEnum.EMPTY,      ObjectEnum.BW_TOP,     ObjectEnum.BW_TOP,     ObjectEnum.EMPTY,      ObjectEnum.BW_BOT,     ObjectEnum.EMPTY,      ObjectEnum.BW_BOT,     ObjectEnum.EMPTY,      ObjectEnum.BW_TOP,     ObjectEnum.BW_TOP,     ObjectEnum.EMPTY,      ObjectEnum.BW_TOP ],
+    [   ObjectEnum.EMPTY,      ObjectEnum.BW_BOT,     ObjectEnum.EMPTY,      ObjectEnum.BW_BOT,     ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.BW_FULL,    ObjectEnum.BW_FULL,    ObjectEnum.EMPTY,      ObjectEnum.BW_BOT,     ObjectEnum.EMPTY,      ObjectEnum.BW_BOT,     ObjectEnum.EMPTY ],
+    [   ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY ],
+    [   ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY,      ObjectEnum.BW_TOP,     ObjectEnum.EMPTY,      ObjectEnum.BW_TOP,     ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY ],
+    [   ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY,      ObjectEnum.BW_BR,      ObjectEnum.BW_BOT,     ObjectEnum.BW_BL,      ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY,      ObjectEnum.BW_FULL,    ObjectEnum.EMPTY ],
+    [   ObjectEnum.EMPTY,      ObjectEnum.EMPTY,      ObjectEnum.EMPTY,      ObjectEnum.EMPTY,      ObjectEnum.EMPTY,      ObjectEnum.BW_RIGHT,   ObjectEnum.EMPTY,      ObjectEnum.BW_LEFT,    ObjectEnum.EMPTY,      ObjectEnum.EMPTY,      ObjectEnum.EMPTY,      ObjectEnum.EMPTY,      ObjectEnum.EMPTY ],
 ];
