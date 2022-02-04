@@ -12,7 +12,7 @@ export class Game {
         this.ctx = ctx;
 
         this.spriteSheet = new Image();
-        this.spriteSheet.src = "img/sprites_tp.png";
+        this.spriteSheet.src = "img/sprites_tp_fixed.png";
 
         this.player = new Player(this.spriteSheet);
         this.player.setCellPosition(4, 4);
