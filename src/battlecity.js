@@ -1,8 +1,17 @@
-import { Player } from '/Player.js'
-import { Direction } from '/Direction.js'
-import { BrickWall } from '/BrickWall.js'
-import { Game } from './Game.js';
+var xmlhttp = new XMLHttpRequest();
+xmlhttp.addEventListener("loadend", Game.loaded, false);
+xmlhttp.open("GET", "stages/stage_01.bin", true);
+xmlhttp.responseType = "arraybuffer";
+xmlhttp.send();
 
+xmlhttp.onload = function (event) {
+    var array = xmlhttp.response;
+    if (array) {
+        var byteArray = new Uint8Array(array);
+        Globals.currentStageBinary = byteArray;
+        Globals.stageLoaded = true;
+    }
+}
 
 window.onload = function () {
 
