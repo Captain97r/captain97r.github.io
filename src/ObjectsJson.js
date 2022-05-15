@@ -204,6 +204,38 @@ var ObjectsJson =
                     "frameY" : [256]
                 }
             }
+        },
+        "concreteWall" :
+        {
+            "tile" : 
+            {
+                "frameX" : [0],
+                "frameY" : [272]
+            }
+        },
+        "ice" :
+        {
+            "tile" :
+            {
+                "frameX" : [0],
+                "frameY" : [288]
+            }
+        },
+        "grass" :
+        {
+            "tile" :
+            {
+                "frameX" : [0],
+                "frameY" : [304]
+            }
+        },
+        "water" :
+        {
+            "tile" :
+            {
+                "frameX" : [0],
+                "frameY" : [320]
+            }
         }
     }
 

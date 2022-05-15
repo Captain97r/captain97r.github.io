@@ -1,4 +1,4 @@
-class BrickWallTile extends GameObject {
+class BrickWall extends GameObject {
 
     constructor(tile) {
         super();

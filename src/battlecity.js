@@ -1,6 +1,6 @@
 var xmlhttp = new XMLHttpRequest();
 xmlhttp.addEventListener("loadend", Game.loaded, false);
-xmlhttp.open("GET", "stages/stage_01.bin", true);
+xmlhttp.open("GET", "stages/stage_04.bin", true);
 xmlhttp.responseType = "arraybuffer";
 xmlhttp.send();
 
