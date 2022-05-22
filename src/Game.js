@@ -28,7 +28,6 @@ class Game {
         var y = this._player._posY % decimation;
 
         if (this._player._prevDirection != this._player.direction) {
-            console.log("Direction changed");
             switch(this._player.getDirection()) {
                 case Direction.DOWN:
                 case Direction.UP:
@@ -42,7 +41,9 @@ class Game {
                     if (y > decimation / 2)
                         this._player._posY += (decimation - y);
                     else
+                    {
                         this._player._posY -= y;
+                    }
                     break;
             }
 
@@ -50,30 +51,35 @@ class Game {
 
         this._player._prevDirection = this._player.direction;
 
-        // this._player._posX = Math.round(this._player._posX);
-        // this._player._posY = Math.round(this._player._posY);
+
+        var collision = false;
 
         this._objectContainer.getObjects().forEach((object) => {
             if (object !== this._player) {
                 if ((this._player.getRightBoundary() > object.getLeftBoundary()) && (this._player.getLeftBoundary() < object.getRightBoundary()) &&
                     (this._player.getBottomBoundary() > object.getTopBoundary()) && (this._player.getTopBoundary() < object.getBottomBoundary())) {
-                    switch(this._player.getDirection()) {
-                        case Direction.DOWN:
-                            this._player._posY -= this._player.getSpeed() * this._player.getTimeDelta();
-                            break;
-                        case Direction.UP:
-                            this._player._posY += this._player.getSpeed() * this._player.getTimeDelta();
-                            break;
-                        case Direction.LEFT:
-                            this._player._posX += this._player.getSpeed() * this._player.getTimeDelta();
-                            break;
-                        case Direction.RIGHT:
-                            this._player._posX -= this._player.getSpeed() * this._player.getTimeDelta();
-                            break;
-                    }
+                        collision = true;
+                    
                 }
             }
         });
+
+        if (collision) {
+            switch(this._player.getDirection()) {
+                case Direction.DOWN:
+                    this._player._posY -= this._player.getSpeed() * this._player.getTimeDelta();
+                    break;
+                case Direction.UP:
+                    this._player._posY += this._player.getSpeed() * this._player.getTimeDelta();
+                    break;
+                case Direction.LEFT:
+                    this._player._posX += this._player.getSpeed() * this._player.getTimeDelta();
+                    break;
+                case Direction.RIGHT:
+                    this._player._posX -= this._player.getSpeed() * this._player.getTimeDelta();
+                    break;
+            }
+        }
 
         //this._player.draw(this.ctx);
 
