@@ -13,6 +13,7 @@ class Tank extends GameObject {
         this.dt = 0;
         this.frameTime = this.frameTimeLimit;
         this._currentFrame = 0;
+        this._prevDirection = Direction.UP;
     }
 
     stopMotion() {
@@ -26,13 +27,26 @@ class Tank extends GameObject {
     setSpeed(speed) {
         this.speed = speed;
     }
+
+    getSpeed() {
+        return this.speed;
+    }
     
     setTimeDelta(dt) {
         this.dt = dt;
     }
 
+    getTimeDelta() {
+        return this.dt;
+    }
+
     setDirection(direction) {
+        this._prevDirection = this.direction;
         this.direction = direction;
+    }
+    
+    getDirection() {
+        return this.direction;
     }
 
     setActiveFrame(direction, frame) {

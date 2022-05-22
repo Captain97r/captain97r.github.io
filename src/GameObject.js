@@ -26,4 +26,20 @@ class GameObject {
                             this._posX,             this._posY, 
                             this._width,            this._height);
     }
+
+    getRightBoundary() {
+        return this._posX + this._width;
+    }
+
+    getLeftBoundary() {
+        return this._posX;
+    }
+
+    getTopBoundary() {
+        return this._posY;
+    }
+
+    getBottomBoundary() {
+        return this._posY + this._height;
+    }
 }

@@ -1,8 +1,19 @@
 var xmlhttp = new XMLHttpRequest();
 xmlhttp.addEventListener("loadend", Game.loaded, false);
-xmlhttp.open("GET", "stages/stage_04.bin", true);
+xmlhttp.addEventListener("progress", updateProgress, false);
+xmlhttp.open("GET", "stages/stage_01.bin", true);
 xmlhttp.responseType = "arraybuffer";
 xmlhttp.send();
+
+// состояние передачи от сервера к клиенту (загрузка)
+function updateProgress (oEvent) {
+    if (oEvent.lengthComputable) {
+      var percentComplete = oEvent.loaded / oEvent.total;
+      console.log(percentComplete);
+    } else {
+      // Невозможно вычислить состояние загрузки, так как размер неизвестен
+    }
+  }
 
 xmlhttp.onload = function (event) {
     var array = xmlhttp.response;
