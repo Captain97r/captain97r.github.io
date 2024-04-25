@@ -119,6 +119,36 @@ var ObjectsJson =
         }
     },
 
+    "bullets" :
+    {
+        "animationFrames" : 1,
+        "objectSizeX" : 8,
+        "objectSizeY" : 8,
+        "tiles" : 
+        {
+            "up" :
+            {
+                "frameX" : [0],
+                "frameY" : [352]
+            },
+            "right" :
+            {
+                "frameX" : [8],
+                "frameY" : [352]
+            },
+            "down" :
+            {
+                "frameX" : [16],
+                "frameY" : [352]
+            },
+            "left" :
+            {
+                "frameX" : [24],
+                "frameY" : [352]
+            }
+        }
+    },
+
     "walls" : 
     {
         "animationFrames" : 1,

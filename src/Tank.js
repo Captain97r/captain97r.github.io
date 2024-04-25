@@ -49,6 +49,10 @@ class Tank extends GameObject {
         return this.direction;
     }
 
+    fire() {
+        // logic to add bullet to sprite container
+    }
+
     setActiveFrame(direction, frame) {
         switch(direction) {
             case Direction.UP:
