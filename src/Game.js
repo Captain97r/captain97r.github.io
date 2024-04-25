@@ -18,8 +18,10 @@ class Game {
 
 
     update() {
+        this.ctx.fillStyle = "gray"
+        this.ctx.fillRect(0, 0, (Globals.STAGE_WIDTH + (Globals.STAGE_W_OFFSET * 3)) * Globals.SPRITE_SIZE, (Globals.STAGE_HEIGHT + (Globals.STAGE_H_OFFSET * 2)) * Globals.SPRITE_SIZE);
         this.ctx.fillStyle = "black";
-        this.ctx.fillRect(0, 0, 1000, 1000);
+        this.ctx.fillRect(Globals.STAGE_W_OFFSET * Globals.SPRITE_SIZE, Globals.STAGE_W_OFFSET * Globals.SPRITE_SIZE, Globals.STAGE_WIDTH * Globals.SPRITE_SIZE, Globals.STAGE_HEIGHT * Globals.SPRITE_SIZE);
 
         this._player.update();
 
@@ -57,12 +59,18 @@ class Game {
         this._objectContainer.getObjects().forEach((object) => {
             if (object !== this._player) {
                 if ((this._player.getRightBoundary() > object.getLeftBoundary()) && (this._player.getLeftBoundary() < object.getRightBoundary()) &&
-                    (this._player.getBottomBoundary() > object.getTopBoundary()) && (this._player.getTopBoundary() < object.getBottomBoundary())) {
+                     (this._player.getBottomBoundary() > object.getTopBoundary()) && (this._player.getTopBoundary() < object.getBottomBoundary())) {
                         collision = true;
-                    
                 }
             }
         });
+
+        if ((this._player.getRightBoundary() > ((Globals.STAGE_WIDTH + Globals.STAGE_W_OFFSET) * Globals.SPRITE_SIZE)) || 
+            (this._player.getLeftBoundary() < (Globals.STAGE_W_OFFSET * Globals.SPRITE_SIZE)) || 
+            (this._player.getBottomBoundary() > ((Globals.STAGE_HEIGHT + Globals.STAGE_H_OFFSET) * Globals.SPRITE_SIZE)) || 
+            (this._player.getTopBoundary() < (Globals.STAGE_H_OFFSET * Globals.SPRITE_SIZE))) {
+                collision = true;
+        }
 
         if (collision) {
             switch(this._player.getDirection()) {

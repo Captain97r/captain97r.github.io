@@ -1,8 +1,8 @@
 class GameObject {
 
     constructor() {
-        this._posX = 0;
-        this._posY = 0;
+        this._posX = Globals.STAGE_W_OFFSET;
+        this._posY = Globals.STAGE_H_OFFSET;
         this._frameContainer = {};
         this._activeFrameX;
         this._activeFrameY;
@@ -15,8 +15,8 @@ class GameObject {
     }
 
     setXYPosition(x, y) {
-        this._posX = x;
-        this._posY = y;
+        this._posX = x + (Globals.STAGE_W_OFFSET * Globals.SPRITE_SIZE);
+        this._posY = y + (Globals.STAGE_H_OFFSET * Globals.SPRITE_SIZE);
     }
 
     draw(context) {
