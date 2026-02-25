@@ -6,6 +6,7 @@ class Bullet extends GameObject {
         this.direction = direction;
         this.dt = 0;
         this.speed = speed;
+        this._isActive = true;
 
         switch(this.direction) {
             case Direction.DOWN:
@@ -54,5 +55,17 @@ class Bullet extends GameObject {
                 this._posX += this.speed * this.dt;
                 break;
         }
+
+        // Mark bullet as inactive if it goes off-screen
+        if (this._posX < -Globals.SPRITE_SIZE || 
+            this._posX > Globals.STAGE_WIDTH * Globals.SPRITE_SIZE ||
+            this._posY < -Globals.SPRITE_SIZE || 
+            this._posY > Globals.STAGE_HEIGHT * Globals.SPRITE_SIZE) {
+            this._isActive = false;
+        }
+    }
+
+    isActive() {
+        return this._isActive;
     }
 }

@@ -20,4 +20,14 @@ class ObjectContainer {
           }
           return null;
     }
+
+    // Remove objects that are no longer needed (e.g. off-screen bullets)
+    removeInactiveObjects() {
+        for (let i = this._objectContainer.length - 1; i >= 0; i--) {
+            const obj = this._objectContainer[i];
+            if (obj && typeof obj.isActive === 'function' && !obj.isActive()) {
+                this._objectContainer.splice(i, 1);
+            }
+        }
+    }
 }

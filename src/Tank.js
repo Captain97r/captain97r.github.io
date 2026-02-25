@@ -50,7 +50,39 @@ class Tank extends GameObject {
     }
 
     fire() {
-        // logic to add bullet to sprite container
+        // Base implementation - can be overridden by subclasses
+        // Create a bullet with default properties and direction
+        let bullet = new Bullet(5, this.direction);
+        
+        // Position the bullet at the muzzle of the tank based on its direction
+        switch(this.direction) {
+            case Direction.UP:
+                bullet.setXYPosition(
+                    this._posX + (this.spriteSize / 2) - (Globals.objects.bullet.objectSizeX / 2),
+                    this._posY - Globals.objects.bullet.objectSizeY
+                );
+                break;
+            case Direction.RIGHT:
+                bullet.setXYPosition(
+                    this._posX + this.spriteSize,
+                    this._posY + (this.spriteSize / 2) - (Globals.objects.bullet.objectSizeY / 2)
+                );
+                break;
+            case Direction.DOWN:
+                bullet.setXYPosition(
+                    this._posX + (this.spriteSize / 2) - (Globals.objects.bullet.objectSizeX / 2),
+                    this._posY + this.spriteSize
+                );
+                break;
+            case Direction.LEFT:
+                bullet.setXYPosition(
+                    this._posX - Globals.objects.bullet.objectSizeX,
+                    this._posY + (this.spriteSize / 2) - (Globals.objects.bullet.objectSizeY / 2)
+                );
+                break;
+        }
+        
+        return bullet;
     }
 
     setActiveFrame(direction, frame) {

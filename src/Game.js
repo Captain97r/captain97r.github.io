@@ -89,11 +89,19 @@ class Game {
             }
         }
 
-        //this._player.draw(this.ctx);
+        // Update all objects including bullets
+        this._objectContainer.getObjects().forEach(element => {
+            if (element.update) {
+                element.update();
+            }
+        });
 
-        this._objectContainer.getObjects().forEach(element => element.draw(this.ctx));
-
-
+        // Draw all objects including bullets
+        this._objectContainer.getObjects().forEach(element => {
+            if (element.draw) {
+                element.draw(this.ctx);
+            }
+        });
     }
 
 
@@ -114,6 +122,11 @@ class Game {
                 break;
             case "KeyD":
                 this._player.pushKey(Direction.RIGHT);
+                break;
+            case "Space":
+                // Fire bullet when spacebar is pressed
+                let bullet = this._player.fire();
+                this._objectContainer.addObject(bullet);
                 break;
         }
     }
