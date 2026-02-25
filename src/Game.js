@@ -126,7 +126,9 @@ class Game {
             case "Space":
                 // Fire bullet when spacebar is pressed
                 let bullet = this._player.fire();
-                this._objectContainer.addObject(bullet);
+                if (bullet) {
+                    this._objectContainer.addObject(bullet);
+                }
                 break;
         }
     }
