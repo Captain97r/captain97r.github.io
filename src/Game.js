@@ -89,9 +89,9 @@ class Game {
             }
         }
 
-        // Update all objects including bullets
+        // Update all objects including bullets (skip player — already updated above)
         this._objectContainer.getObjects().forEach(element => {
-            if (element.update) {
+            if (element !== this._player && element.update) {
                 element.update();
             }
         });
