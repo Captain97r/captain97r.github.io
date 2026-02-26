@@ -73,4 +73,49 @@ class Bullet extends GameObject {
     isActive() {
         return this._isActive;
     }
+
+    /**
+     * Check if bullet collides with any wall in the provided array.
+     * Uses AABB collision detection.
+     * @param {Array} walls - Array of wall objects (BrickWall or ConcreteWall)
+     * @returns {{ collided: boolean, wallType: string|null }} Collision result
+     */
+    checkWallCollision(walls) {
+        if (!walls || !Array.isArray(walls)) {
+            return { collided: false, wallType: null };
+        }
+
+        for (let wall of walls) {
+            // Check AABB collision between bullet and wall
+            const bulletLeft = this._posX;
+            const bulletRight = this._posX + Globals.BULLET_SIZE_X;
+            const bulletTop = this._posY;
+            const bulletBottom = this._posY + Globals.BULLET_SIZE_Y;
+
+            const wallLeft = wall.getLeftBoundary();
+            const wallRight = wall.getRightBoundary();
+            const wallTop = wall.getTopBoundary();
+            const wallBottom = wall.getBottomBoundary();
+
+            // AABB collision check
+            if (bulletLeft < wallRight && 
+                bulletRight > wallLeft && 
+                bulletTop < wallBottom && 
+                bulletBottom > wallTop) {
+                
+                // Determine wall type based on constructor
+                const isBrick = wall.constructor.name === 'BrickWall';
+                return { collided: true, wallType: isBrick ? 'brick' : 'concrete' };
+            }
+        }
+
+        return { collided: false, wallType: null };
+    }
+
+    /**
+     * Deactivate the bullet (stop rendering and update)
+     */
+    destroy() {
+        this._isActive = false;
+    }
 }

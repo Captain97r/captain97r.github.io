@@ -21,6 +21,20 @@ class ObjectContainer {
           return null;
     }
 
+    /**
+     * Get all wall objects from the container.
+     * @returns {Array} Array of BrickWall and ConcreteWall instances
+     */
+    getWalls() {
+        const walls = [];
+        for (let obj of this._objectContainer) {
+            if (obj instanceof BrickWall || obj instanceof ConcreteWall) {
+                walls.push(obj);
+            }
+        }
+        return walls;
+    }
+
     // Remove objects that are no longer needed (e.g. off-screen bullets)
     removeInactiveObjects() {
         for (let i = this._objectContainer.length - 1; i >= 0; i--) {

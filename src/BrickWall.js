@@ -11,10 +11,15 @@ class BrickWall extends GameObject {
         
         this._activeFrameX = this._frameContainer.frameX[0];
         this._activeFrameY = this._frameContainer.frameY[0];
+        this._isActive = true;
     }
 
     destroy() {
-
+        // Mark brick wall as inactive so it gets removed from the game
+        this._isActive = false;
     }
 
+    isActive() {
+        return this._isActive;
+    }
 }
