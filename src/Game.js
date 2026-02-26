@@ -107,6 +107,12 @@ class Game {
 
     setTimeDelta(dt) {
         this._player.setTimeDelta(dt);
+        // Propagate time delta to all objects including bullets so they can move properly
+        this._objectContainer.getObjects().forEach(obj => {
+            if (obj !== this._player && obj.setTimeDelta) {
+                obj.setTimeDelta(dt);
+            }
+        });
     }
 
     handleKeyPress(evt) {

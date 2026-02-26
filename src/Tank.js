@@ -58,26 +58,26 @@ class Tank extends GameObject {
         switch(this.direction) {
             case Direction.UP:
                 bullet.setXYPosition(
-                    this._posX + (this.spriteSize / 2) - (Globals.objects.bullet.objectSizeX / 2),
-                    this._posY - Globals.objects.bullet.objectSizeY
+                    this._posX + (this.spriteSize / 2) - (Globals.objects.bullets.objectSizeX / 2),
+                    this._posY - Globals.objects.bullets.objectSizeY
                 );
                 break;
             case Direction.RIGHT:
                 bullet.setXYPosition(
                     this._posX + this.spriteSize,
-                    this._posY + (this.spriteSize / 2) - (Globals.objects.bullet.objectSizeY / 2)
+                    this._posY + (this.spriteSize / 2) - (Globals.objects.bullets.objectSizeY / 2)
                 );
                 break;
             case Direction.DOWN:
                 bullet.setXYPosition(
-                    this._posX + (this.spriteSize / 2) - (Globals.objects.bullet.objectSizeX / 2),
+                    this._posX + (this.spriteSize / 2) - (Globals.objects.bullets.objectSizeX / 2),
                     this._posY + this.spriteSize
                 );
                 break;
             case Direction.LEFT:
                 bullet.setXYPosition(
-                    this._posX - Globals.objects.bullet.objectSizeX,
-                    this._posY + (this.spriteSize / 2) - (Globals.objects.bullet.objectSizeY / 2)
+                    this._posX - Globals.objects.bullets.objectSizeX,
+                    this._posY + (this.spriteSize / 2) - (Globals.objects.bullets.objectSizeY / 2)
                 );
                 break;
         }
