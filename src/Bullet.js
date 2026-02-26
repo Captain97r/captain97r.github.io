@@ -1,3 +1,36 @@
+// Helper function to check if two positions are horizontally adjacent
+// Positions can be integers (0, 1) or midpoints (0.5)
+function areHorizontallyAdjacent(pos1, pos2) {
+    // Check if they share the same y-coordinate and have adjacent x-coordinates
+    const yMatch = Math.abs((pos1.y || 0) - (pos2.y || 0)) < 0.1;
+    
+    // For integer positions: 0 and 1 are adjacent
+    if (!Number.isInteger(pos1.x) && !Number.isInteger(pos2.x)) {
+        return yMatch && Math.abs((pos1.x || 0) - (pos2.x || 0)) < 0.6;
+    }
+    
+    // For integer positions: check exact adjacency
+    const xValues = [pos1.x, pos2.x].sort((a, b) => a - b);
+    return yMatch && xValues[1] - xValues[0] === 1;
+}
+
+// Helper function to check if two positions are vertically adjacent
+function areVerticallyAdjacent(pos1, pos2) {
+    // Check if they share the same x-coordinate and have adjacent y-coordinates
+    const xMatch = Math.abs((pos1.x || 0) - (pos2.x || 0)) < 0.1;
+    
+    // For integer positions: check exact adjacency
+    const yValues = [pos1.y, pos2.y].sort((a, b) => a - b);
+    return xMatch && yValues[1] - yValues[0] === 1;
+}
+
+// Helper function to check if two wall positions are in the same tile
+function isInSameTile(wall1, wall2, tolerance = 8) {
+    const dx = Math.abs(wall1._posX - wall2._posX);
+    const dy = Math.abs(wall1._posY - wall2._posY);
+    return dx < tolerance && dy < tolerance;
+}
+
 class Bullet extends GameObject {
 
     constructor(speed = 5, direction = Direction.UP) {
@@ -78,11 +111,11 @@ class Bullet extends GameObject {
      * Check if bullet collides with any wall in the provided array.
      * Uses AABB collision detection.
      * @param {Array} walls - Array of wall objects (BrickWall or ConcreteWall)
-     * @returns {{ collided: boolean, wallType: string|null }} Collision result
+     * @returns {{ collided: boolean, wallType: string|null, hitWall: BrickWall|ConcreteWall|null }} Collision result
      */
     checkWallCollision(walls) {
         if (!walls || !Array.isArray(walls)) {
-            return { collided: false, wallType: null };
+            return { collided: false, wallType: null, hitWall: null };
         }
 
         for (let wall of walls) {
@@ -105,11 +138,82 @@ class Bullet extends GameObject {
                 
                 // Determine wall type based on constructor
                 const isBrick = wall.constructor.name === 'BrickWall';
-                return { collided: true, wallType: isBrick ? 'brick' : 'concrete' };
+                return { collided: true, wallType: isBrick ? 'brick' : 'concrete', hitWall: wall };
             }
         }
 
-        return { collided: false, wallType: null };
+        return { collided: false, wallType: null, hitWall: null };
+    }
+
+    /**
+     * Find adjacent brick walls that should also be destroyed.
+     * A wall is considered adjacent if it shares an edge with the hit wall's sub-tile position
+     * and they are in the same map tile.
+     * @param {BrickWall} hitWall - The wall object that was initially hit
+     * @param {Array<BrickWall>} allBrickWalls - All brick walls in the game
+     * @returns {Array<BrickWall>} Array of adjacent walls to destroy
+     */
+    findAdjacentWalls(hitWall, allBrickWalls) {
+        const hitPos = hitWall.getSubTilePosition();
+        const adjacentWalls = [];
+        
+        // Check each wall in the array for adjacency
+        for (let wall of allBrickWalls) {
+            if (wall === hitWall || !wall.isActive()) continue; // Skip self and inactive walls
+            
+            const wallPos = wall.getSubTilePosition();
+            
+            // First check: walls must be in the same tile to be adjacent
+            if (!isInSameTile(hitWall, wall)) {
+                continue;
+            }
+            
+            // Skip full brick walls (they occupy all sub-tiles and don't have neighbors)
+            if ((hitPos.x === 0.5 && hitPos.y === 0.5) || 
+                (wallPos.x === 0.5 && wallPos.y === 0.5)) {
+                continue;
+            }
+            
+            // Check horizontal adjacency (same row, adjacent columns)
+            if (hitPos.y !== undefined && wallPos.y !== undefined &&
+                areHorizontallyAdjacent(hitPos, wallPos)) {
+                adjacentWalls.push(wall);
+                continue; // Found one match, no need to check vertical
+            }
+            
+            // Check vertical adjacency (same column, adjacent rows)
+            if (hitPos.x !== undefined && wallPos.x !== undefined &&
+                areVerticallyAdjacent(hitPos, wallPos)) {
+                adjacentWalls.push(wall);
+            }
+        }
+        
+        return adjacentWalls;
+    }
+
+    /**
+     * Handle bullet-wall collision by destroying brick walls and deactivating the bullet.
+     * @param {Array<BrickWall>} brickWalls - Array of all active brick walls
+     */
+    handleWallCollision(brickWalls) {
+        const collisionResult = this.checkWallCollision(brickWalls);
+        
+        if (collisionResult.collided && collisionResult.wallType === 'brick' && collisionResult.hitWall) {
+            // Destroy the hit wall and any adjacent walls
+            const wallsToDestroy = [collisionResult.hitWall, ...this.findAdjacentWalls(collisionResult.hitWall, brickWalls)];
+            
+            // Use a Set to avoid destroying the same wall twice
+            const uniqueWallsToDestroy = [...new Set(wallsToDestroy)];
+            
+            for (let wall of uniqueWallsToDestroy) {
+                if (wall.isActive()) {
+                    wall.destroy();
+                }
+            }
+        }
+        
+        // Deactivate the bullet after collision
+        this.destroy();
     }
 
     /**
