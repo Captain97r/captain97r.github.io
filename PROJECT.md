@@ -362,3 +362,95 @@ Stage files (`.bin`) use a packed format:
 - Each byte encodes 2 map tiles (4 bits each)
 - Stage dimensions: 14 columns × 13 rows
 - Tile values correspond to `MapBlockEnum` constants
+
+## Coordinate System
+
+The game uses a **2D Cartesian coordinate system** with the following conventions:
+
+| Axis | Direction | Increases |
+|------|-----------|-----------|
+| **X** | Horizontal | → Right |
+| **Y** | Vertical | ↓ Down (inverted from standard math) |
+
+### Visual Representation
+
+```
+(0,0) ──────────────────────────────────→ X (right)
+  │
+  │
+  │
+  ▼
+  Y (down)
+```
+
+### Canvas Coordinate System
+
+This is the standard HTML5 Canvas coordinate system:
+
+- **Origin (0, 0)**: Top-left corner of the canvas
+- **X increases**: Moving right across the screen
+- **Y increases**: Moving down the screen (not up like in standard mathematics)
+
+### Game-Specific Coordinates
+
+| Element | Coordinate System |
+|---------|-------------------|
+| **Canvas** | 1000×1000 pixels (defined in `index.html`) |
+| **Stage** | 14×13 tiles (defined in `Globals.js`) |
+| **Tile size** | 32×32 pixels (`Globals.SPRITE_SIZE`) |
+| **Stage offset** | 1 tile on each side (`Globals.STAGE_W_OFFSET`, `Globals.STAGE_H_OFFSET`) |
+
+### Position Calculations
+
+```javascript
+// Object position in pixels (from GameObject.js)
+setXYPosition(x, y) {
+    this._posX = x + (Globals.STAGE_W_OFFSET * Globals.SPRITE_SIZE);
+    this._posY = y + (Globals.STAGE_H_OFFSET * Globals.SPRITE_SIZE);
+}
+
+// Example: Place object at tile (2, 3) in stage coordinates
+object.setXYPosition(2 * 32, 3 * 32);  // Converts to pixel coordinates
+```
+
+### Movement Direction
+
+```javascript
+// From Tank.js - movement affects coordinates differently per direction
+update() {
+    switch(this.direction) {
+        case Direction.DOWN:
+            this._posY += this.speed * this.dt;  // Y increases (moving down)
+            break;
+        case Direction.UP:
+            this._posY -= this.speed * this.dt;  // Y decreases (moving up)
+            break;
+        case Direction.LEFT:
+            this._posX -= this.speed * this.dt;  // X decreases (moving left)
+            break;
+        case Direction.RIGHT:
+            this._posX += this.speed * this.dt;  // X increases (moving right)
+            break;
+    }
+}
+```
+
+### Boundary Calculations
+
+```javascript
+// From GameObject.js
+getRightBoundary()   { return this._posX + this._width; }   // Right edge
+getLeftBoundary()    { return this._posX; }                 // Left edge
+getTopBoundary()     { return this._posY; }                 // Top edge (smaller Y)
+getBottomBoundary()  { return this._posY + this._height; }  // Bottom edge (larger Y)
+```
+
+### Stage Boundaries
+
+```javascript
+// Playable area (from Game.js)
+Left:   Globals.STAGE_W_OFFSET * Globals.SPRITE_SIZE
+Right:  (Globals.STAGE_WIDTH + Globals.STAGE_W_OFFSET) * Globals.SPRITE_SIZE
+Top:    Globals.STAGE_H_OFFSET * Globals.SPRITE_SIZE
+Bottom: (Globals.STAGE_HEIGHT + Globals.STAGE_H_OFFSET) * Globals.SPRITE_SIZE
+```
