@@ -15,5 +15,9 @@ Globals.STAGE_H_OFFSET = 1;
 
 Globals.SPRITE_SIZE = 32;
 
+// Bullet dimensions from ObjectsJson
+Globals.BULLET_SIZE_X = Globals.objects.bullets.objectSizeX || 8;
+Globals.BULLET_SIZE_Y = Globals.objects.bullets.objectSizeY || 8;
+
 Globals.currentStageBinary = {};
 Globals.stageLoaded = false;

@@ -56,11 +56,16 @@ class Bullet extends GameObject {
                 break;
         }
 
-        // Mark bullet as inactive if it goes off-screen
-        if (this._posX < -Globals.SPRITE_SIZE || 
-            this._posX > Globals.STAGE_WIDTH * Globals.SPRITE_SIZE ||
-            this._posY < -Globals.SPRITE_SIZE || 
-            this._posY > Globals.STAGE_HEIGHT * Globals.SPRITE_SIZE) {
+        // Mark bullet as inactive if it goes off-screen (accounting for stage offsets and bullet size)
+        const leftBoundary = -Globals.BULLET_SIZE_X;  // Allow half-bullet-width buffer on left
+        const rightBoundary = (Globals.STAGE_WIDTH + Globals.STAGE_W_OFFSET) * Globals.SPRITE_SIZE + Globals.BULLET_SIZE_X;
+        const topBoundary = -Globals.BULLET_SIZE_Y;  // Allow half-bullet-height buffer on top
+        const bottomBoundary = (Globals.STAGE_HEIGHT + Globals.STAGE_H_OFFSET) * Globals.SPRITE_SIZE + Globals.BULLET_SIZE_Y;
+
+        if (this._posX < leftBoundary || 
+            this._posX > rightBoundary ||
+            this._posY < topBoundary || 
+            this._posY > bottomBoundary) {
             this._isActive = false;
         }
     }

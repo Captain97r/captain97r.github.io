@@ -54,31 +54,28 @@ class Tank extends GameObject {
         // Create a bullet with default properties and direction
         let bullet = new Bullet(5, this.direction);
         
+        // Get bullet dimensions for positioning
+        const bulletWidth = Globals.objects.bullets.objectSizeX;
+        const bulletHeight = Globals.objects.bullets.objectSizeY;
+        
         // Position the bullet at the muzzle of the tank based on its direction
+        // Note: We use direct pixel assignment to avoid double-offsetting from setXYPosition
         switch(this.direction) {
             case Direction.UP:
-                bullet.setXYPosition(
-                    this._posX + (this.spriteSize / 2) - (Globals.objects.bullets.objectSizeX / 2),
-                    this._posY - Globals.objects.bullets.objectSizeY
-                );
+                bullet._posX = this._posX + (this.spriteSize / 2) - (bulletWidth / 2);
+                bullet._posY = this._posY - bulletHeight;
                 break;
             case Direction.RIGHT:
-                bullet.setXYPosition(
-                    this._posX + this.spriteSize,
-                    this._posY + (this.spriteSize / 2) - (Globals.objects.bullets.objectSizeY / 2)
-                );
+                bullet._posX = this._posX + this.spriteSize;
+                bullet._posY = this._posY + (this.spriteSize / 2) - (bulletHeight / 2);
                 break;
             case Direction.DOWN:
-                bullet.setXYPosition(
-                    this._posX + (this.spriteSize / 2) - (Globals.objects.bullets.objectSizeX / 2),
-                    this._posY + this.spriteSize
-                );
+                bullet._posX = this._posX + (this.spriteSize / 2) - (bulletWidth / 2);
+                bullet._posY = this._posY + this.spriteSize;
                 break;
             case Direction.LEFT:
-                bullet.setXYPosition(
-                    this._posX - Globals.objects.bullets.objectSizeX,
-                    this._posY + (this.spriteSize / 2) - (Globals.objects.bullets.objectSizeY / 2)
-                );
+                bullet._posX = this._posX - bulletWidth;
+                bullet._posY = this._posY + (this.spriteSize / 2) - (bulletHeight / 2);
                 break;
         }
         
