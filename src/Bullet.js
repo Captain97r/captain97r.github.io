@@ -2,7 +2,7 @@ class Bullet extends GameObject {
 
     constructor(speed = 5, direction = Direction.UP) {
         super();
-        this.setSpriteContainer(Globals.objects.bullet.tiles, Globals.objects.bullet.objectSizeX, Globals.objects.bullet.objectSizeY);
+        this.setSpriteContainer(Globals.objects.bullets.tiles, Globals.objects.bullets.objectSizeX, Globals.objects.bullets.objectSizeY);
         this.direction = direction;
         this.dt = 0;
         this.speed = speed;
