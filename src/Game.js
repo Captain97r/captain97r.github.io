@@ -96,14 +96,28 @@ class Game {
             }
         });
 
-        // Check bullet-wall collisions with proper destruction logic
+        // Check bullet-wall collisions
         const walls = this._objectContainer.getWalls();
         const objects = this._objectContainer.getObjects();
         
         objects.forEach(element => {
             if (element !== this._player && element instanceof Bullet) {
-                // Use the new handleWallCollision method which handles adjacent wall destruction
-                element.handleWallCollision(walls);
+                const collisionResult = element.checkWallCollision(walls);
+                if (collisionResult.collided) {
+                    // Deactivate bullet
+                    element.destroy();
+                    
+                    // Destroy brick wall, concrete walls remain intact
+                    if (collisionResult.wallType === 'brick') {
+                        walls.forEach(wall => {
+                            if (wall.constructor.name === 'BrickWall' && 
+                                Math.abs(wall.getLeftBoundary() - element.getLeftBoundary()) < Globals.BULLET_SIZE_X &&
+                                Math.abs(wall.getTopBoundary() - element.getTopBoundary()) < Globals.BULLET_SIZE_Y) {
+                                wall.destroy();
+                            }
+                        });
+                    }
+                }
             }
         });
 

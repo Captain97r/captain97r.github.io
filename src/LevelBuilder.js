@@ -13,69 +13,165 @@ class LevelBuilder {
 
                 switch(blockArray[i * Globals.STAGE_WIDTH + j]) {
                     case MapBlockEnum.BW_RIGHT:
-                        var wall1 = new BrickWall(WallTileEnum.BRICK_RIGHT);
-                        wall1.setXYPosition((j * 32) + 16, (i * 32));
-                        objectContainer.addObject(wall1);
+                        var tile1 = new BrickWall(WallTileEnum.BRICK_FULL);
+                        var tile2 = new BrickWall(WallTileEnum.BRICK_FULL);
+
+                        tile1.setXYPosition((j * 32) + 16,  (i * 32));
+                        tile2.setXYPosition((j * 32) + 16,  (i * 32) + 16);
+
+                        objectContainer.addObject(tile1);
+                        objectContainer.addObject(tile2);
                         break;
                     case MapBlockEnum.BW_BOT:
-                        var wall2 = new BrickWall(WallTileEnum.BRICK_BOT);
-                        wall2.setXYPosition((j * 32), (i * 32) + 16);
-                        objectContainer.addObject(wall2);
+                        var tile1 = new BrickWall(WallTileEnum.BRICK_FULL);
+                        var tile2 = new BrickWall(WallTileEnum.BRICK_FULL);
+
+                        tile1.setXYPosition((j * 32),        (i * 32) + 16);
+                        tile2.setXYPosition((j * 32) + 16,   (i * 32) + 16);
+
+                        objectContainer.addObject(tile1);
+                        objectContainer.addObject(tile2);
                         break;
                     case MapBlockEnum.BW_LEFT:
-                        var wall3 = new BrickWall(WallTileEnum.BRICK_LEFT);
-                        wall3.setXYPosition((j * 32), (i * 32));
-                        objectContainer.addObject(wall3);
+                        var tile1 = new BrickWall(WallTileEnum.BRICK_FULL);
+                        var tile2 = new BrickWall(WallTileEnum.BRICK_FULL);
+
+                        tile1.setXYPosition((j * 32),   (i * 32));
+                        tile2.setXYPosition((j * 32),   (i * 32) + 16);
+
+                        objectContainer.addObject(tile1);
+                        objectContainer.addObject(tile2);
                         break;
                     case MapBlockEnum.BW_TOP:
-                        var wall4 = new BrickWall(WallTileEnum.BRICK_TOP);
-                        wall4.setXYPosition((j * 32), (i * 32));
-                        objectContainer.addObject(wall4);
+                        var tile1 = new BrickWall(WallTileEnum.BRICK_FULL);
+                        var tile2 = new BrickWall(WallTileEnum.BRICK_FULL);
+
+                        tile1.setXYPosition((j * 32),        (i * 32));
+                        tile2.setXYPosition((j * 32) + 16,   (i * 32));
+
+                        objectContainer.addObject(tile1);
+                        objectContainer.addObject(tile2);
                         break;
                     case MapBlockEnum.BW_FULL:
-                        var wall5 = new BrickWall(WallTileEnum.BRICK_FULL);
-                        wall5.setXYPosition((j * 32) + 16, (i * 32) + 16);
-                        objectContainer.addObject(wall5);
+                        var tile1 = new BrickWall(WallTileEnum.BRICK_FULL);
+                        var tile2 = new BrickWall(WallTileEnum.BRICK_FULL);
+                        var tile3 = new BrickWall(WallTileEnum.BRICK_FULL);
+                        var tile4 = new BrickWall(WallTileEnum.BRICK_FULL);
+
+                        tile1.setXYPosition((j * 32),        (i * 32));
+                        tile2.setXYPosition((j * 32) + 16,   (i * 32));
+                        tile3.setXYPosition((j * 32),        (i * 32) + 16);
+                        tile4.setXYPosition((j * 32) + 16,   (i * 32) + 16);
+
+                        objectContainer.addObject(tile1);
+                        objectContainer.addObject(tile2);
+                        objectContainer.addObject(tile3);
+                        objectContainer.addObject(tile4);
                         break;
                     case MapBlockEnum.CW_RIGHT:
-                        var cwall1 = new ConcreteWall(WallTileEnum.BRICK_FULL);
-                        cwall1.setXYPosition((j * 32) + 16, (i * 32));
-                        objectContainer.addObject(cwall1);
+                        var tile1 = new ConcreteWall(WallTileEnum.BRICK_FULL);
+                        var tile2 = new ConcreteWall(WallTileEnum.BRICK_FULL);
+
+                        tile1.setXYPosition((j * 32) + 16,  (i * 32));
+                        tile2.setXYPosition((j * 32) + 16,  (i * 32) + 16);
+
+                        objectContainer.addObject(tile1);
+                        objectContainer.addObject(tile2);
                         break;
                     case MapBlockEnum.CW_BOT:
-                        var cwall2 = new ConcreteWall(WallTileEnum.BRICK_FULL);
-                        cwall2.setXYPosition((j * 32), (i * 32) + 16);
-                        objectContainer.addObject(cwall2);
+                        var tile1 = new ConcreteWall(WallTileEnum.BRICK_FULL);
+                        var tile2 = new ConcreteWall(WallTileEnum.BRICK_FULL);
+
+                        tile1.setXYPosition((j * 32),        (i * 32) + 16);
+                        tile2.setXYPosition((j * 32) + 16,   (i * 32) + 16);
+
+                        objectContainer.addObject(tile1);
+                        objectContainer.addObject(tile2);
                         break;
                     case MapBlockEnum.CW_LEFT:
-                        var cwall3 = new ConcreteWall(WallTileEnum.BRICK_FULL);
-                        cwall3.setXYPosition((j * 32), (i * 32));
-                        objectContainer.addObject(cwall3);
+                        var tile1 = new ConcreteWall(WallTileEnum.BRICK_FULL);
+                        var tile2 = new ConcreteWall(WallTileEnum.BRICK_FULL);
+
+                        tile1.setXYPosition((j * 32),   (i * 32));
+                        tile2.setXYPosition((j * 32),   (i * 32) + 16);
+
+                        objectContainer.addObject(tile1);
+                        objectContainer.addObject(tile2);
                         break;
                     case MapBlockEnum.CW_TOP:
-                        var cwall4 = new ConcreteWall(WallTileEnum.BRICK_FULL);
-                        cwall4.setXYPosition((j * 32), (i * 32));
-                        objectContainer.addObject(cwall4);
+                        var tile1 = new ConcreteWall(WallTileEnum.BRICK_FULL);
+                        var tile2 = new ConcreteWall(WallTileEnum.BRICK_FULL);
+
+                        tile1.setXYPosition((j * 32),        (i * 32));
+                        tile2.setXYPosition((j * 32) + 16,   (i * 32));
+
+                        objectContainer.addObject(tile1);
+                        objectContainer.addObject(tile2);
                         break;
+                        
                     case MapBlockEnum.CW_FULL:
-                        var cwall5 = new ConcreteWall(WallTileEnum.BRICK_FULL);
-                        cwall5.setXYPosition((j * 32) + 16, (i * 32) + 16);
-                        objectContainer.addObject(cwall5);
+                        var tile1 = new ConcreteWall(WallTileEnum.BRICK_FULL);
+                        var tile2 = new ConcreteWall(WallTileEnum.BRICK_FULL);
+                        var tile3 = new ConcreteWall(WallTileEnum.BRICK_FULL);
+                        var tile4 = new ConcreteWall(WallTileEnum.BRICK_FULL);
+
+                        tile1.setXYPosition((j * 32),        (i * 32));
+                        tile2.setXYPosition((j * 32) + 16,   (i * 32));
+                        tile3.setXYPosition((j * 32),        (i * 32) + 16);
+                        tile4.setXYPosition((j * 32) + 16,   (i * 32) + 16);
+
+                        objectContainer.addObject(tile1);
+                        objectContainer.addObject(tile2);
+                        objectContainer.addObject(tile3);
+                        objectContainer.addObject(tile4);
                         break;
                     case MapBlockEnum.WATER:
-                        var wtr = new Water(WallTileEnum.BRICK_FULL);
-                        wtr.setXYPosition((j * 32) + 16, (i * 32) + 16);
-                        objectContainer.addObject(wtr);
+                        var tile1 = new Water(WallTileEnum.BRICK_FULL);
+                        var tile2 = new Water(WallTileEnum.BRICK_FULL);
+                        var tile3 = new Water(WallTileEnum.BRICK_FULL);
+                        var tile4 = new Water(WallTileEnum.BRICK_FULL);
+
+                        tile1.setXYPosition((j * 32),        (i * 32));
+                        tile2.setXYPosition((j * 32) + 16,   (i * 32));
+                        tile3.setXYPosition((j * 32),        (i * 32) + 16);
+                        tile4.setXYPosition((j * 32) + 16,   (i * 32) + 16);
+
+                        objectContainer.addObject(tile1);
+                        objectContainer.addObject(tile2);
+                        objectContainer.addObject(tile3);
+                        objectContainer.addObject(tile4);
                         break;
                     case MapBlockEnum.GRASS:
-                        var grs = new Grass(WallTileEnum.BRICK_FULL);
-                        grs.setXYPosition((j * 32) + 16, (i * 32) + 16);
-                        objectContainer.addObject(grs);
+                        var tile1 = new Grass(WallTileEnum.BRICK_FULL);
+                        var tile2 = new Grass(WallTileEnum.BRICK_FULL);
+                        var tile3 = new Grass(WallTileEnum.BRICK_FULL);
+                        var tile4 = new Grass(WallTileEnum.BRICK_FULL);
+
+                        tile1.setXYPosition((j * 32),        (i * 32));
+                        tile2.setXYPosition((j * 32) + 16,   (i * 32));
+                        tile3.setXYPosition((j * 32),        (i * 32) + 16);
+                        tile4.setXYPosition((j * 32) + 16,   (i * 32) + 16);
+
+                        objectContainer.addObject(tile1);
+                        objectContainer.addObject(tile2);
+                        objectContainer.addObject(tile3);
+                        objectContainer.addObject(tile4);
                         break;
                     case MapBlockEnum.ICE:
-                        var ice = new Ice(WallTileEnum.BRICK_FULL);
-                        ice.setXYPosition((j * 32) + 16, (i * 32) + 16);
-                        objectContainer.addObject(ice);
+                        var tile1 = new Ice(WallTileEnum.BRICK_FULL);
+                        var tile2 = new Ice(WallTileEnum.BRICK_FULL);
+                        var tile3 = new Ice(WallTileEnum.BRICK_FULL);
+                        var tile4 = new Ice(WallTileEnum.BRICK_FULL);
+
+                        tile1.setXYPosition((j * 32),        (i * 32));
+                        tile2.setXYPosition((j * 32) + 16,   (i * 32));
+                        tile3.setXYPosition((j * 32),        (i * 32) + 16);
+                        tile4.setXYPosition((j * 32) + 16,   (i * 32) + 16);
+
+                        objectContainer.addObject(tile1);
+                        objectContainer.addObject(tile2);
+                        objectContainer.addObject(tile3);
+                        objectContainer.addObject(tile4);
                         break;
                     case MapBlockEnum.EMPTY:
                         break;
