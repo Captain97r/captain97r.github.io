@@ -107,12 +107,19 @@ class Game {
                     // Deactivate bullet
                     element.destroy();
                     
-                    // Destroy brick wall, concrete walls remain intact
+                    // Destroy all brick walls overlapping with the bullet, concrete walls remain intact
                     if (collisionResult.wallType === 'brick') {
+                        const bulletLeft = element._posX;
+                        const bulletRight = element._posX + Globals.BULLET_SIZE_X;
+                        const bulletTop = element._posY;
+                        const bulletBottom = element._posY + Globals.BULLET_SIZE_Y;
+
                         walls.forEach(wall => {
-                            if (wall.constructor.name === 'BrickWall' && 
-                                Math.abs(wall.getLeftBoundary() - element.getLeftBoundary()) < Globals.BULLET_SIZE_X &&
-                                Math.abs(wall.getTopBoundary() - element.getTopBoundary()) < Globals.BULLET_SIZE_Y) {
+                            if (wall.constructor.name === 'BrickWall' && wall.isActive() &&
+                                bulletLeft < wall.getRightBoundary() &&
+                                bulletRight > wall.getLeftBoundary() &&
+                                bulletTop < wall.getBottomBoundary() &&
+                                bulletBottom > wall.getTopBoundary()) {
                                 wall.destroy();
                             }
                         });
