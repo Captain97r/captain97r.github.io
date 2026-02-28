@@ -178,7 +178,7 @@ class Game {
                                 bulletRight > wall.getLeftBoundary() &&
                                 bulletTop < wall.getBottomBoundary() &&
                                 bulletBottom > wall.getTopBoundary()) {
-                                wall.destroy();
+                                wall.damage(element.direction);
                             }
                         });
                     }

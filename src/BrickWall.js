@@ -2,10 +2,12 @@ class BrickWall extends GameObject {
 
     constructor(tile) {
         super();
-        
+
+        this._tileType = tile;
+
         // Initialize sub-tile position for adjacency detection
         this._subTilePosition = this._getSubTilePositionForTile(tile);
-        
+
         switch(tile)
         {
             case WallTileEnum.BRICK_FULL:
@@ -114,6 +116,51 @@ class BrickWall extends GameObject {
      */
     getSubTilePosition() {
         return this._subTilePosition;
+    }
+
+    damage(bulletDirection) {
+        if (this._tileType === WallTileEnum.BRICK_FULL) {
+            // Full tile → convert to half-tile (remove the half the bullet hits)
+            switch (bulletDirection) {
+                case Direction.UP:
+                    this._setTile(WallTileEnum.BRICK_TOP);
+                    break;
+                case Direction.DOWN:
+                    this._setTile(WallTileEnum.BRICK_BOT);
+                    break;
+                case Direction.LEFT:
+                    this._setTile(WallTileEnum.BRICK_LEFT);
+                    break;
+                case Direction.RIGHT:
+                    this._setTile(WallTileEnum.BRICK_RIGHT);
+                    break;
+            }
+        } else {
+            // Already a partial tile → destroy completely
+            this.destroy();
+        }
+    }
+
+    _setTile(tileType) {
+        this._tileType = tileType;
+        this._subTilePosition = this._getSubTilePositionForTile(tileType);
+
+        const tiles = Globals.objects.walls.brickWall.tiles;
+        const size = { w: Globals.objects.walls.objectSizeX, h: Globals.objects.walls.objectSizeY };
+
+        switch (tileType) {
+            case WallTileEnum.BRICK_LEFT:
+                this.setSpriteContainer(tiles.left, size.w, size.h); break;
+            case WallTileEnum.BRICK_RIGHT:
+                this.setSpriteContainer(tiles.right, size.w, size.h); break;
+            case WallTileEnum.BRICK_TOP:
+                this.setSpriteContainer(tiles.top, size.w, size.h); break;
+            case WallTileEnum.BRICK_BOT:
+                this.setSpriteContainer(tiles.bot, size.w, size.h); break;
+        }
+
+        this._activeFrameX = this._frameContainer.frameX[0];
+        this._activeFrameY = this._frameContainer.frameY[0];
     }
 
     destroy() {

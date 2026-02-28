@@ -188,7 +188,7 @@ var ObjectsJson =
                     "frameX" : [80],
                     "frameY" : [256]
                 },
-                "bottom" :
+                "bot" :
                 {
                     "frameX" : [96],
                     "frameY" : [256]
