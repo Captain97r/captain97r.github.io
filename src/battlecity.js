@@ -28,19 +28,29 @@ window.onload = function () {
 
     let ctx = document.getElementById('drawingCanvas').getContext('2d');
 
-    let game = new Game(ctx);
+    let currentScreen = new MenuScreen(ctx);
 
-    // TODO: idk how bind() works but I need to know it
-    document.addEventListener("keydown", game.handleKeyPress.bind(game));
-    document.addEventListener("keyup", game.handleKeyRelease.bind(game));
+    document.addEventListener("keydown", function(evt) {
+        currentScreen.handleKeyPress(evt);
+    });
+    document.addEventListener("keyup", function(evt) {
+        if (currentScreen.handleKeyRelease)
+            currentScreen.handleKeyRelease(evt);
+    });
 
     var lastUpdateTime = (new Date()).getTime();
 
     setInterval(function() {
-        game.update();
+        currentScreen.update();
         var currentTime = (new Date()).getTime();
         var timeDifference = currentTime - lastUpdateTime;
-        game.setTimeDelta(timeDifference / 20);
+        if (currentScreen.setTimeDelta)
+            currentScreen.setTimeDelta(timeDifference / 20);
         lastUpdateTime = currentTime;
-      }, 1000 / 240);
+
+        // Menu → Game transition
+        if (currentScreen instanceof MenuScreen && currentScreen.isStartGame()) {
+            currentScreen = new Game(ctx);
+        }
+    }, 1000 / 240);
 }

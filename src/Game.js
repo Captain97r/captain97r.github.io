@@ -39,6 +39,10 @@ class Game {
     }
 
 
+    isGameOver() {
+        return this._gameOver;
+    }
+
     update() {
         this.ctx.fillStyle = "gray"
         this.ctx.fillRect(0, 0, (Globals.STAGE_WIDTH + (Globals.STAGE_W_OFFSET * 3)) * Globals.SPRITE_SIZE, (Globals.STAGE_HEIGHT + (Globals.STAGE_H_OFFSET * 2)) * Globals.SPRITE_SIZE);
