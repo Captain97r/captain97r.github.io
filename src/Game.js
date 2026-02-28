@@ -14,6 +14,28 @@ class Game {
 
         let levelBuilder = new LevelBuilder();
         levelBuilder.build(this._objectContainer, this._stageBinary);
+
+        this._eagle = new Eagle();
+        this._eagle.setXYPosition(192, 384);
+        this._objectContainer.addObject(this._eagle);
+
+        // Build U-shaped brick fortress around the eagle (16x16 sub-tiles)
+        // Eagle is at (192, 384), 32x32. Fortress: top row + left/right sides.
+        const fortressPositions = [
+            // Top row (4 bricks)
+            [176, 368], [192, 368], [208, 368], [224, 368],
+            // Left side (2 bricks)
+            [176, 384], [176, 400],
+            // Right side (2 bricks)
+            [224, 384], [224, 400],
+        ];
+        for (const [fx, fy] of fortressPositions) {
+            let brick = new BrickWall(WallTileEnum.BRICK_FULL);
+            brick.setXYPosition(fx, fy);
+            this._objectContainer.addObject(brick);
+        }
+
+        this._gameOver = false;
     }
 
 
@@ -22,6 +44,24 @@ class Game {
         this.ctx.fillRect(0, 0, (Globals.STAGE_WIDTH + (Globals.STAGE_W_OFFSET * 3)) * Globals.SPRITE_SIZE, (Globals.STAGE_HEIGHT + (Globals.STAGE_H_OFFSET * 2)) * Globals.SPRITE_SIZE);
         this.ctx.fillStyle = "black";
         this.ctx.fillRect(Globals.STAGE_W_OFFSET * Globals.SPRITE_SIZE, Globals.STAGE_W_OFFSET * Globals.SPRITE_SIZE, Globals.STAGE_WIDTH * Globals.SPRITE_SIZE, Globals.STAGE_HEIGHT * Globals.SPRITE_SIZE);
+
+        if (this._gameOver) {
+            // Still draw all objects (including destroyed eagle)
+            this._objectContainer.getObjects().forEach(element => {
+                if (element.draw) {
+                    element.draw(this.ctx);
+                }
+            });
+            this._eagle.draw(this.ctx);
+            // Draw GAME OVER text
+            this.ctx.fillStyle = "red";
+            this.ctx.font = "bold 32px monospace";
+            this.ctx.textAlign = "center";
+            const centerX = (Globals.STAGE_W_OFFSET + Globals.STAGE_WIDTH / 2) * Globals.SPRITE_SIZE;
+            const centerY = (Globals.STAGE_H_OFFSET + Globals.STAGE_HEIGHT / 2) * Globals.SPRITE_SIZE;
+            this.ctx.fillText("GAME OVER", centerX, centerY);
+            return;
+        }
 
         this._player.update();
 
@@ -102,11 +142,29 @@ class Game {
         
         objects.forEach(element => {
             if (element !== this._player && element instanceof Bullet) {
+                // Check bullet-eagle collision
+                if (this._eagle.isActive()) {
+                    const bLeft = element._posX;
+                    const bRight = element._posX + Globals.BULLET_SIZE_X;
+                    const bTop = element._posY;
+                    const bBottom = element._posY + Globals.BULLET_SIZE_Y;
+
+                    if (bLeft < this._eagle.getRightBoundary() &&
+                        bRight > this._eagle.getLeftBoundary() &&
+                        bTop < this._eagle.getBottomBoundary() &&
+                        bBottom > this._eagle.getTopBoundary()) {
+                        element.destroy();
+                        this._eagle.destroy();
+                        this._gameOver = true;
+                        return;
+                    }
+                }
+
                 const collisionResult = element.checkWallCollision(walls);
                 if (collisionResult.collided) {
                     // Deactivate bullet
                     element.destroy();
-                    
+
                     // Destroy all brick walls overlapping with the bullet, concrete walls remain intact
                     if (collisionResult.wallType === 'brick') {
                         const bulletLeft = element._posX;
@@ -137,6 +195,9 @@ class Game {
                 element.draw(this.ctx);
             }
         });
+
+        // Always draw the eagle on top (it handles alive/destroyed sprite internally)
+        this._eagle.draw(this.ctx);
     }
 
 

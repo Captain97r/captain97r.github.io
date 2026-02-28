@@ -267,6 +267,22 @@ var ObjectsJson =
                 "frameY" : [320]
             }
         }
+    },
+
+    "eagle" :
+    {
+        "objectSizeX" : 32,
+        "objectSizeY" : 32,
+        "alive" :
+        {
+            "frameX" : [0],
+            "frameY" : [360]
+        },
+        "destroyed" :
+        {
+            "frameX" : [32],
+            "frameY" : [360]
+        }
     }
 
 }`
