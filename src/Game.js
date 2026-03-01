@@ -36,6 +36,7 @@ class Game {
         }
 
         this._gameOver = false;
+        this._gameOverTextY = (Globals.STAGE_H_OFFSET + Globals.STAGE_HEIGHT + 5) * Globals.SPRITE_SIZE;
     }
 
 
@@ -57,13 +58,19 @@ class Game {
                 }
             });
             this._eagle.draw(this.ctx);
+            
+            // Animate GAME OVER text from bottom to center
+            const targetCenterY = (Globals.STAGE_H_OFFSET + Globals.STAGE_HEIGHT / 2) * Globals.SPRITE_SIZE;
+            if (this._gameOverTextY < targetCenterY) {
+                this._gameOverTextY += 3;
+            }
+            
             // Draw GAME OVER text
             this.ctx.fillStyle = "red";
             this.ctx.font = "bold 32px monospace";
             this.ctx.textAlign = "center";
             const centerX = (Globals.STAGE_W_OFFSET + Globals.STAGE_WIDTH / 2) * Globals.SPRITE_SIZE;
-            const centerY = (Globals.STAGE_H_OFFSET + Globals.STAGE_HEIGHT / 2) * Globals.SPRITE_SIZE;
-            this.ctx.fillText("GAME OVER", centerX, centerY);
+            this.ctx.fillText("GAME OVER", centerX, this._gameOverTextY);
             return;
         }
 
