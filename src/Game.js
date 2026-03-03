@@ -36,6 +36,7 @@ class Game {
         }
 
         this._gameOver = false;
+        this._gameOverLabel = new GameOverLabel(ctx);
     }
 
 
@@ -49,7 +50,7 @@ class Game {
         this.ctx.fillStyle = "black";
         this.ctx.fillRect(Globals.STAGE_W_OFFSET * Globals.SPRITE_SIZE, Globals.STAGE_W_OFFSET * Globals.SPRITE_SIZE, Globals.STAGE_WIDTH * Globals.SPRITE_SIZE, Globals.STAGE_HEIGHT * Globals.SPRITE_SIZE);
 
-        if (this._gameOver) {
+if (this._gameOver) {
             // Still draw all objects (including destroyed eagle)
             this._objectContainer.getObjects().forEach(element => {
                 if (element.draw) {
@@ -57,13 +58,10 @@ class Game {
                 }
             });
             this._eagle.draw(this.ctx);
-            // Draw GAME OVER text
-            this.ctx.fillStyle = "red";
-            this.ctx.font = "bold 32px monospace";
-            this.ctx.textAlign = "center";
-            const centerX = (Globals.STAGE_W_OFFSET + Globals.STAGE_WIDTH / 2) * Globals.SPRITE_SIZE;
-            const centerY = (Globals.STAGE_H_OFFSET + Globals.STAGE_HEIGHT / 2) * Globals.SPRITE_SIZE;
-            this.ctx.fillText("GAME OVER", centerX, centerY);
+            
+            // Draw GAME OVER label with animation
+            this._gameOverLabel.update();
+            this._gameOverLabel.draw(this.ctx);
             return;
         }
 
@@ -153,13 +151,14 @@ class Game {
                     const bTop = element._posY;
                     const bBottom = element._posY + Globals.BULLET_SIZE_Y;
 
-                    if (bLeft < this._eagle.getRightBoundary() &&
+if (bLeft < this._eagle.getRightBoundary() &&
                         bRight > this._eagle.getLeftBoundary() &&
                         bTop < this._eagle.getBottomBoundary() &&
                         bBottom > this._eagle.getTopBoundary()) {
                         element.destroy();
                         this._eagle.destroy();
                         this._gameOver = true;
+                        this._gameOverLabel.startAnimation();
                         return;
                     }
                 }
