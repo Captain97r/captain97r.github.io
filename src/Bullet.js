@@ -33,13 +33,14 @@ function isInSameTile(wall1, wall2, tolerance = 8) {
 
 class Bullet extends GameObject {
 
-    constructor(speed = 5, direction = Direction.UP) {
+    constructor(speed = 5, direction = Direction.UP, team = 'player') {
         super();
         this.setSpriteContainer(Globals.objects.bullets.tiles, Globals.objects.bullets.objectSizeX, Globals.objects.bullets.objectSizeY);
         this.direction = direction;
         this.dt = 0;
         this.speed = speed;
         this._isActive = true;
+        this._team = team;  // 'player' or 'enemy'
 
         switch(this.direction) {
             case Direction.DOWN:
@@ -69,6 +70,10 @@ class Bullet extends GameObject {
         return this.direction;
     }
 
+    getTeam() {
+        return this._team;
+    }
+
     setTimeDelta(dt) {
         this.dt = dt;
     }
@@ -89,11 +94,12 @@ class Bullet extends GameObject {
                 break;
         }
 
-        // Mark bullet as inactive if it goes off-screen (accounting for stage offsets and bullet size)
-        const leftBoundary = -Globals.BULLET_SIZE_X;  // Allow half-bullet-width buffer on left
-        const rightBoundary = (Globals.STAGE_WIDTH + Globals.STAGE_W_OFFSET) * Globals.SPRITE_SIZE + Globals.BULLET_SIZE_X;
-        const topBoundary = -Globals.BULLET_SIZE_Y;  // Allow half-bullet-height buffer on top
-        const bottomBoundary = (Globals.STAGE_HEIGHT + Globals.STAGE_H_OFFSET) * Globals.SPRITE_SIZE + Globals.BULLET_SIZE_Y;
+        // Mark bullet as inactive if it goes outside the stage boundaries
+        // Use same boundaries as player collision in Game.js
+        const leftBoundary = Globals.STAGE_W_OFFSET * Globals.SPRITE_SIZE;
+        const rightBoundary = (Globals.STAGE_WIDTH + Globals.STAGE_W_OFFSET) * Globals.SPRITE_SIZE - Globals.BULLET_SIZE_X;
+        const topBoundary = Globals.STAGE_H_OFFSET * Globals.SPRITE_SIZE;
+        const bottomBoundary = (Globals.STAGE_HEIGHT + Globals.STAGE_H_OFFSET) * Globals.SPRITE_SIZE - Globals.BULLET_SIZE_Y;
 
         if (this._posX < leftBoundary || 
             this._posX > rightBoundary ||

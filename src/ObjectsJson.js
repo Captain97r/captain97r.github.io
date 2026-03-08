@@ -116,6 +116,73 @@ var ObjectsJson =
                 } 
             }
             
+        },
+        "enemyTank":
+        {
+            "types":
+            {
+                "basic":
+                {
+                    "animation":
+                    {
+                        "up":    { "frameX": [0, 32], "frameY": [424, 424] },
+                        "right": { "frameX": [0, 32], "frameY": [456, 456] },
+                        "down":  { "frameX": [0, 32], "frameY": [488, 488] },
+                        "left":  { "frameX": [0, 32], "frameY": [520, 520] }
+                    }
+                },
+                "fast":
+                {
+                    "animation":
+                    {
+                        "up":    { "frameX": [0, 32], "frameY": [552, 552] },
+                        "right": { "frameX": [0, 32], "frameY": [584, 584] },
+                        "down":  { "frameX": [0, 32], "frameY": [616, 616] },
+                        "left":  { "frameX": [0, 32], "frameY": [648, 648] }
+                    }
+                },
+                "power":
+                {
+                    "animation":
+                    {
+                        "up":    { "frameX": [0, 32], "frameY": [680, 680] },
+                        "right": { "frameX": [0, 32], "frameY": [712, 712] },
+                        "down":  { "frameX": [0, 32], "frameY": [744, 744] },
+                        "left":  { "frameX": [0, 32], "frameY": [776, 776] }
+                    }
+                },
+                "armor":
+                {
+                    "animation":
+                    {
+                        "up":    { "frameX": [0, 32], "frameY": [808, 808] },
+                        "right": { "frameX": [0, 32], "frameY": [840, 840] },
+                        "down":  { "frameX": [0, 32], "frameY": [872, 872] },
+                        "left":  { "frameX": [0, 32], "frameY": [904, 904] }
+                    },
+                    "hp2Animation":
+                    {
+                        "up":    { "frameX": [192, 224], "frameY": [808, 808] },
+                        "right": { "frameX": [192, 224], "frameY": [840, 840] },
+                        "down":  { "frameX": [192, 224], "frameY": [872, 872] },
+                        "left":  { "frameX": [192, 224], "frameY": [904, 904] }
+                    },
+                    "hp3Animation":
+                    {
+                        "up":    { "frameX": [256, 288], "frameY": [808, 808] },
+                        "right": { "frameX": [256, 288], "frameY": [840, 840] },
+                        "down":  { "frameX": [256, 288], "frameY": [872, 872] },
+                        "left":  { "frameX": [256, 288], "frameY": [904, 904] }
+                    },
+                    "hp4Animation":
+                    {
+                        "up":    { "frameX": [320, 352], "frameY": [808, 808] },
+                        "right": { "frameX": [320, 352], "frameY": [840, 840] },
+                        "down":  { "frameX": [320, 352], "frameY": [872, 872] },
+                        "left":  { "frameX": [320, 352], "frameY": [904, 904] }
+                    }
+                }
+            }
         }
     },
 

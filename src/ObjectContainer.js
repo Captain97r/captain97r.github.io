@@ -35,6 +35,34 @@ class ObjectContainer {
         return walls;
     }
 
+    /**
+     * Get all enemy tank objects from the container.
+     * @returns {Array<EnemyTank>}
+     */
+    getEnemyTanks() {
+        const enemies = [];
+        for (let obj of this._objectContainer) {
+            if (obj instanceof EnemyTank) {
+                enemies.push(obj);
+            }
+        }
+        return enemies;
+    }
+
+    /**
+     * Get all bullet objects from the container.
+     * @returns {Array<Bullet>}
+     */
+    getBullets() {
+        const bullets = [];
+        for (let obj of this._objectContainer) {
+            if (obj instanceof Bullet) {
+                bullets.push(obj);
+            }
+        }
+        return bullets;
+    }
+
     // Remove objects that are no longer needed (e.g. off-screen bullets)
     removeInactiveObjects() {
         for (let i = this._objectContainer.length - 1; i >= 0; i--) {

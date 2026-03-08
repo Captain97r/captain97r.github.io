@@ -14,6 +14,7 @@ class Tank extends GameObject {
         this.frameTime = this.frameTimeLimit;
         this._currentFrame = 0;
         this._prevDirection = Direction.UP;
+        this._activeBullet = null;  // Track active bullet for Battle City firing rule
     }
 
     stopMotion() {
@@ -50,9 +51,14 @@ class Tank extends GameObject {
     }
 
     fire() {
-        // Base implementation - can be overridden by subclasses
+        // Battle City rule: can only fire if no active bullet exists
+        if (this._activeBullet !== null && this._activeBullet.isActive()) {
+            return null;  // Cannot fire - bullet already active
+        }
+        
         // Create a bullet with default properties and direction
-        let bullet = new Bullet(5, this.direction);
+        // Subclasses can override _getBulletSpeed() and _getTeam()
+        let bullet = new Bullet(this._getBulletSpeed(), this.direction, this._getTeam());
         
         // Get bullet dimensions for positioning
         const bulletWidth = Globals.objects.bullets.objectSizeX;
@@ -79,7 +85,17 @@ class Tank extends GameObject {
                 break;
         }
         
+        // Store reference to the active bullet
+        this._activeBullet = bullet;
         return bullet;
+    }
+
+    _getBulletSpeed() {
+        return 5;
+    }
+
+    _getTeam() {
+        return 'player';
     }
 
     setActiveFrame(direction, frame) {
